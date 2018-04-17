@@ -1,4 +1,4 @@
-package vocabulary;
+package grammar;
 
 import java.util.HashMap;
 

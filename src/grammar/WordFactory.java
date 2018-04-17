@@ -1,4 +1,4 @@
-package vocabulary;
+package grammar;
 
 public class WordFactory {
 	private static Word create(WordType type, String baseForm, int ID) {

@@ -1,10 +1,10 @@
-package vocabulary;
+package grammar;
 
 public abstract class Word {
 	private int ID;
 	private String baseForm;
 	private WordType type;
-	private int languageID;
+	private String language;
 	private int languageLevel;
 	
 	protected Word(String baseForm, int ID, WordType type) {
@@ -37,12 +37,12 @@ public abstract class Word {
 		this.type = type;
 	}
 
-	public int getLanguageID() {
-		return languageID;
+	public String getLanguageID() {
+		return language;
 	}
 
-	public void setLanguageID(int languageID) {
-		this.languageID = languageID;
+	public void setLanguageID(String language) {
+		this.language = language;
 	}
 
 	public int getLanguageLevel() {

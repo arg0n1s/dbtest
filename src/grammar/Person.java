@@ -1,4 +1,4 @@
-package vocabulary;
+package grammar;
 
 public enum Person {
 	firstPersonSingular, secondPersonSingular, thirdPersonSingular,

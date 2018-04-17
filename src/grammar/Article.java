@@ -1,4 +1,4 @@
-package vocabulary;
+package grammar;
 
 public class Article extends Word {
 	private Gender gender;
@@ -26,9 +26,3 @@ public class Article extends Word {
 	
 	
 }
-
-/* https://developer.android.com/training/data-storage/sqlite.html#java
- * https://www.tutorialspoint.com/sqlite/sqlite_java.htm
- * http://www.sqlitetutorial.net/sqlite-java/sqlite-jdbc-driver/
- * http://www.oracle.com/technetwork/java/javase/jdbc/index.html
- */
