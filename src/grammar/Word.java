@@ -37,11 +37,11 @@ public abstract class Word {
 		this.type = type;
 	}
 
-	public String getLanguageID() {
+	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguageID(String language) {
+	public void setLanguage(String language) {
 		this.language = language;
 	}
 

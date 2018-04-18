@@ -1,4 +1,5 @@
 package vocabulary;
+import grammar.Word;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,6 +17,16 @@ public class DataBase {
 	public boolean openDataBase(String name) {
 		try {
 			sqlDataBase.connect(dataBaseFolder+name);
+		} catch (SQLException e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean closeDataBase() {
+		try {
+			sqlDataBase.disconnect();
 		} catch (SQLException e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 			return false;
@@ -50,6 +61,19 @@ public class DataBase {
 				System.out.println(e.getClass().getName() + ": " + e.getMessage());
 				return false;
 			}
+			
+			cmd =	"CREATE TABLE WORDS " +
+					"(ID			INT		PRIMARY KEY		NOT NULL, " + 
+					" BASE_FORM		TEXT     				NOT NULL, " +
+					" LANGUAGE		TEXT     				NOT NULL, " +
+					" LEVEL			INT     				NOT NULL, " +
+					" TYPE			TEXT     				NOT NULL )";
+			try {
+				sqlDataBase.smallUpdate(cmd);
+			} catch (SQLException e) {
+				System.out.println(e.getClass().getName() + ": " + e.getMessage());
+				return false;
+			}
 		}
 		return true;
 	}
@@ -57,6 +81,23 @@ public class DataBase {
 	public boolean addLanguage(String name, int level) {
 		String cmd = "INSERT INTO LANGUAGES (LANGUAGE, LEVEL) " +
                 "VALUES ('" + name + "', " + level + ");";
+		try {
+			sqlDataBase.smallUpdate(cmd);
+		} catch (SQLException e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean addWord(Word word) {
+		String cmd = "INSERT INTO WORDS (ID, BASE_FORM, LANGUAGE, LEVEL, TYPE) " +
+                "VALUES ("	+ word.getID() + ", '" 
+							+ word.getBaseForm() + "', '" 
+							+ word.getLanguage() + "', "
+							+ word.getLanguageLevel() + ", '"
+							+ word.getType().toString() + "' );";
 		try {
 			sqlDataBase.smallUpdate(cmd);
 		} catch (SQLException e) {

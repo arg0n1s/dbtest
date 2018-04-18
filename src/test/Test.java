@@ -98,6 +98,9 @@ public class Test {
 		if(db.addLanguage("Italian", 1)) {
 			System.out.println("Language added Successfully");
 		}
+		if(db.closeDataBase()) {
+			System.out.println("Closed database successfully");
+		}
 		
 	}
 	
