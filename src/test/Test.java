@@ -1,9 +1,15 @@
 package test;
 
 import java.sql.ResultSet;
+import java.util.LinkedList;
+
 import vocabulary.DataBase;
 
 import db.SQLiteJDBC;
+import grammar.Case;
+import grammar.Gender;
+import grammar.Word;
+import grammar.WordFactory;
 
 public class Test {
 	
@@ -95,9 +101,97 @@ public class Test {
 		if(db.addLanguage("Italian", 1)) {
 			System.out.println("Language added Successfully");
 		}
-		if(db.addLanguage("Italian", 1)) {
+		if(db.addLanguage("German", 1)) {
 			System.out.println("Language added Successfully");
 		}
+		Word w1 = WordFactory.createAdjective("facile", "Italian", 1);
+		Word w2 = WordFactory.createArticle("il", "Italian", 1, Gender.male, Case.nominative);
+		Word w3 = WordFactory.createNoun("macchina", "Italian", 1, Gender.female);
+		Word w4 = WordFactory.createVerb("andare", "Italian", 1, false);
+		
+		Word w5 = WordFactory.createAdjective("einfach", "German", 1);
+		Word w6 = WordFactory.createArticle("der", "German", 1, Gender.male, Case.nominative);
+		Word w7 = WordFactory.createNoun("Auto", "German", 1, Gender.male);
+		Word w8 = WordFactory.createVerb("gehen", "German", 1, true);
+		
+		if(db.addWord(w1)) {
+			System.out.println("Word1 added Successfully");
+		}
+		if(db.addWord(w2)) {
+			System.out.println("Word2 added Successfully");
+		}
+		if(db.addWord(w3)) {
+			System.out.println("Word3 added Successfully");
+		}
+		if(db.addWord(w4)) {
+			System.out.println("Word4 added Successfully");
+		}
+		
+		if(db.addWord(w5)) {
+			System.out.println("Word5 added Successfully");
+		}
+		if(db.addWord(w6)) {
+			System.out.println("Word6 added Successfully");
+		}
+		if(db.addWord(w7)) {
+			System.out.println("Word7 added Successfully");
+		}
+		if(db.addWord(w8)) {
+			System.out.println("Word8 added Successfully");
+		}
+		
+		w1 = db.getWord(w1.getID());
+		w2 = db.getWord(w2.getID());
+		w3 = db.getWord(w3.getID());
+		w4 = db.getWord(w4.getID());
+		if(w1 != null) {
+			System.out.println("Word1 retrieved: \n"+w1.toString());
+		}
+		if(w2 != null) {
+			System.out.println("Word2 retrieved: \n"+w2.toString());
+		}
+		if(w3 != null) {
+			System.out.println("Word3 retrieved: \n"+w3.toString());
+		}
+		if(w4 != null) {
+			System.out.println("Word4 retrieved: \n"+w4.toString());
+		}
+		
+		w5 = db.getWord(w5.getID());
+		w6 = db.getWord(w6.getID());
+		w7 = db.getWord(w7.getID());
+		w8 = db.getWord(w8.getID());
+		if(w5 != null) {
+			System.out.println("Word5 retrieved: \n"+w5.toString());
+		}
+		if(w6 != null) {
+			System.out.println("Word6 retrieved: \n"+w6.toString());
+		}
+		if(w7 != null) {
+			System.out.println("Word7 retrieved: \n"+w7.toString());
+		}
+		if(w8 != null) {
+			System.out.println("Word8 retrieved: \n"+w8.toString());
+		}
+		
+		if(db.addTranslation(w1, w5)) {
+			System.out.println("Translation from word1 to word5 added Successfully");
+		}
+		LinkedList<Word> words = db.getTranslations(w1, "German");
+		if(words == null) {
+			System.out.println("Retrieving translation from word1 failed.");
+		} else {
+			
+			for(Word word : words) {
+				if(word != null) {
+					System.out.println("Translation from: \n"+w1.toString()+"\n to: \n"+word.toString()+"\n");
+				}else {
+					System.out.println("Something weird happened during translation..");
+				}
+			}
+		}
+		
+		
 		if(db.closeDataBase()) {
 			System.out.println("Closed database successfully");
 		}

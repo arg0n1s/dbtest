@@ -2,16 +2,30 @@ package grammar;
 
 public abstract class Word {
 	
-	private int ID;
-	private String baseForm;
-	private WordType type;
-	private String language;
-	private int languageLevel;
+	protected int ID;
+	protected String baseForm;
+	protected WordType type;
+	protected String language;
+	protected int languageLevel;
 	
-	protected Word(int ID, String baseForm, WordType type) {
+	protected Word(String baseForm, WordType type, String language, int level) {
+		this.ID = createID(baseForm, language, type);
 		this.baseForm = baseForm;
-		this.ID = ID;
 		this.type = type;
+		this.language = language;
+		this.languageLevel = level;
+	}
+	
+	@Override
+	public String toString() {
+		String out = "[Word: "+baseForm+", ID: "+ID+", Type: "+type.toString()+
+				", Language: "+language+", Level:"+languageLevel+"]";
+		return out;
+	}
+	
+	static public int createID(String baseForm, String language, WordType type) {
+		String key = baseForm+language+type.toString();
+		return key.hashCode();
 	}
 
 	public int getID() {
