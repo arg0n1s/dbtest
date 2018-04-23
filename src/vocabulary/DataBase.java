@@ -1,5 +1,6 @@
 package vocabulary;
 import grammar.Word;
+import grammar.WordFactory;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -106,5 +107,29 @@ public class DataBase {
 		}
 		
 		return true;
+	}
+	
+	public Word getWord(int ID) {
+		String cmd = "SELECT * FROM WORDS WHERE ID = "+ID+";";
+		ResultSet result;
+		try {
+			result = sqlDataBase.query(cmd);
+		} catch (SQLException e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			return null;
+		}
+		
+		Word word = null;
+		try {
+			word = WordFactory.create(result.getString("TYPE"), result.getString("BASE_FORM"), result.getInt("ID"));
+			word.setLanguage(result.getString("LANGUAGE"));
+			word.setLanguageLevel(result.getInt("LEVEL"));
+		} catch (RuntimeException e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+		
+		return word;
 	}
 }

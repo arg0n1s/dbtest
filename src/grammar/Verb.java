@@ -8,8 +8,8 @@ public class Verb extends Word {
 	
 	private HashMap<Person, String> presentConjugation;
 	
-	public Verb(String infinitive, int ID) {
-		super(infinitive, ID, WordType.verb);
+	public Verb(int ID, String infinitive) {
+		super(ID, infinitive, WordType.verb);
 	}
 
 	public boolean isRegular() {

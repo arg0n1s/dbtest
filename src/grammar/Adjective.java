@@ -7,8 +7,8 @@ public class Adjective extends Word {
 	private HashMap<Gender, String> singularDeclinations;
 	private HashMap<Gender, String> pluralDeclinations;
 	
-	public Adjective(String baseForm, int ID) {
-		super(baseForm, ID, WordType.adjective);
+	public Adjective(int ID, String baseForm) {
+		super(ID, baseForm, WordType.adjective);
 	}
 
 	public HashMap<Gender, String> getSingularDeclinations() {

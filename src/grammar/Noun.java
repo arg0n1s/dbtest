@@ -8,8 +8,8 @@ public class Noun extends Word {
 	private HashMap<Case, Integer> singularCaseArticles;
 	private HashMap<Case, Integer> pluralCaseArticles;
 	
-	public Noun(String baseForm, int ID) {
-		super(baseForm, ID, WordType.noun);
+	public Noun(int ID, String baseForm) {
+		super(ID, baseForm, WordType.noun);
 	};
 	
 	public Gender getGender() {

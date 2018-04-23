@@ -1,13 +1,14 @@
 package grammar;
 
 public abstract class Word {
+	
 	private int ID;
 	private String baseForm;
 	private WordType type;
 	private String language;
 	private int languageLevel;
 	
-	protected Word(String baseForm, int ID, WordType type) {
+	protected Word(int ID, String baseForm, WordType type) {
 		this.baseForm = baseForm;
 		this.ID = ID;
 		this.type = type;
@@ -35,6 +36,12 @@ public abstract class Word {
 
 	public void setType(WordType type) {
 		this.type = type;
+	}
+	
+	public void setType(String type) throws RuntimeException {
+		WordType t = WordType.fromString(type);
+		if(t==null) throw new RuntimeException("Given type: "+type+" does not exist.");
+		this.type = t;
 	}
 
 	public String getLanguage() {

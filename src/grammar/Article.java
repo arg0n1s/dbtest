@@ -4,8 +4,8 @@ public class Article extends Word {
 	private Gender gender;
 	private Case grammaticalCase;
 	
-	public Article(String baseForm, int ID) {
-		super(baseForm, ID, WordType.article);
+	public Article(int ID, String baseForm) {
+		super(ID, baseForm, WordType.article);
 	}
 
 	public Gender getGender() {
