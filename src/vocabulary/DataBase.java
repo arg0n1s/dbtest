@@ -214,32 +214,10 @@ public class DataBase {
 	}
 	
 	public LinkedList<Word> getTranslations(Word word, String language) {
-		/*
-		String cmd = "SELECT * FROM RELATIONS WHERE ID1 = "+word.getID()+" AND LANGUAGE1 = '"+word.getLanguage()
-					+"' AND LANGUAGE2 = '"+language+"';";
-		ResultSet result;
-		LinkedList<Integer> retrievedIDs = new LinkedList<Integer>();
-		try {
-			result = sqlDataBase.query(cmd);
-			while(result.next()) {
-				retrievedIDs.add(result.getInt("ID2"));
-			}
-		} catch (SQLException e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-			return null;
-		}
-		ArrayList<Word> retrievedWords = new ArrayList<Word>();
-		for(Integer id : retrievedIDs) {
-			retrievedWords.add(getWord(id));
-		}
-		return retrievedWords;
-		*/
-		String cmd = "SELECT W.BASE_FORM AS BASE_FORM, W.TYPE AS TYPE, W.LANGUAGE AS LANGUAGE, W.LEVEL AS LEVEL " +
-		"FROM WORDS AS W " +
-		"INNER JOIN RELATIONS AS REL ON (REL.ID1 = W.ID) " + 
-		"INNER JOIN RELATIONS AS REL ON (REL.ID2 = W.ID) " + 
-		"INNER JOIN RELATIONS AS REL ON (REL.LANGUAGE2 = W.LANGUAGE) " +
-		"WHERE REL.ID1 = "+word.getID()+" AND REL.LANGUAGE2 = '"+language+"';";
+		String cmd =	"SELECT BASE_FORM , TYPE, LANGUAGE, LEVEL " +
+						"FROM WORDS " +
+						"WHERE ID IN (SELECT RELATIONS.ID2 FROM RELATIONS WHERE RELATIONS.ID1 = " + 
+						word.getID()+" AND RELATIONS.LANGUAGE2 = '"+language+"');";
 		ResultSet result;
 		LinkedList<Word> retrievedWords = new LinkedList<Word>();
 		try {
